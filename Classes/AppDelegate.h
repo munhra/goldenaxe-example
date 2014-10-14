@@ -3,7 +3,7 @@
 #define COCOS2D_DEBUG 1
 
 #include "CCApplication.h"
-//test2
+//test3
 /**
 @brief    The cocos2d Application.
 
