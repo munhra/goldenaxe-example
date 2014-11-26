@@ -29,12 +29,15 @@ public:
     virtual void ccTouchMoved(CCTouch* touch, CCEvent* event);
     virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
     virtual void endMoveCallBack(CCNode* sender);
-
+    void fimDeJogo();
+    void criaInimigo();
+    void destroiInimigo(cocos2d::CCNode* s);
+    void mataInimigo(CCNode* s);
+    void calculaColisao();
+    cocos2d::CCArray* inimigosVivos;
+    cocos2d::CCSprite* axeBattle;
     // implement the "static node()" method manually
     CREATE_FUNC(GamePlayScene);
-
-private:
-    void delayTest(float dt);
 };
 
 #endif /* GAMEPLAYSCENE_H_ */
