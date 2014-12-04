@@ -1,5 +1,5 @@
-APPNAME="GoldenAxe2"
-APP_ANDROID_NAME="com.aeo.game.goldenaxe"
+APPNAME="GoldenAxe"
+APP_ANDROID_NAME="edu.munhra.goldenaxe"
 
 if [ -z "${SDK_ROOT+aaa}" ]; then
 # ... if SDK_ROOT is not set, use "$HOME/bin/android-sdk"

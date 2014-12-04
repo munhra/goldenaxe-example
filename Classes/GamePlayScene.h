@@ -9,7 +9,6 @@
 #define GAMEPLAYSCENE_H_
 
 #include "cocos2d.h"
-#include "Enemy.h"
 
 using namespace cocos2d;
 
@@ -30,18 +29,12 @@ public:
     virtual void ccTouchMoved(CCTouch* touch, CCEvent* event);
     virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
     virtual void endMoveCallBack(CCNode* sender);
-//    virtual void endMoveEnemyCallBack(CCNode* sender);
 
     // implement the "static node()" method manually
     CREATE_FUNC(GamePlayScene);
 
 private:
-    Enemy *enemy;
-
     void delayTest(float dt);
-    void delayEnemy();
-    void update();
-//    void enemyMovement(CCPoint location);
 };
 
 #endif /* GAMEPLAYSCENE_H_ */
