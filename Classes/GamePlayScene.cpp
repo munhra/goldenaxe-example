@@ -8,10 +8,14 @@
 #include "GamePlayScene.h"
 #include "MenuScene.h"
 #include "SimpleAudioEngine.h"
+#include "Enemy.h"
+#include "EnemyController.h"
 
 
 using namespace cocos2d;
 using namespace CocosDenshion;
+
+USING_NS_CC;
 
 CCAction *heroAnimAction;
 CCAction *heroRunAnimation;
@@ -19,7 +23,13 @@ CCAction *heroMoveAction;
 CCAction *heroStopped;
 CCSprite *axeBattle;
 CCLabelTTF* logLabel;
+
+
 bool run;
+static int waveNum = 1;
+CCPoint positionHero;
+CCSprite *heroSprite;
+
 
 CCScene* GamePlayScene::scene() {
 	CCScene *scene = CCScene::create();
@@ -47,7 +57,7 @@ bool GamePlayScene::init() {
 
 	axeBattle = CCSprite::create("walk1.png");
 	axeBattle->retain();
-	axeBattle->setPosition(ccp(200, 200));
+	axeBattle->setPosition(ccp(500, 200));
 
 	run = false;
 
@@ -99,6 +109,8 @@ bool GamePlayScene::init() {
 
 	heroStopped->retain();
 
+
+
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
 	logLabel = CCLabelTTF::create("Hello World XXXX", "Thonburi", 34);
 	logLabel->setPosition(ccp(size.width / 2, size.height - 20));
@@ -109,6 +121,11 @@ bool GamePlayScene::init() {
 			this, 0, true);
 
 	this->addChild(axeBattle);
+
+	positionHero = axeBattle->getPosition();
+	this->schedule(schedule_selector(GamePlayScene::delayEnemy), 3);
+
+
 	this->addChild(logLabel);
 	this->setTouchEnabled(true);
 	this->schedule(schedule_selector(GamePlayScene::delayTest), 1.0);
@@ -127,12 +144,24 @@ bool GamePlayScene::init() {
 
 	this->schedule(schedule_selector(GamePlayScene::delayTest),12,-1,0);
 
+	EnemyController::Instance()->setIsGameOver();
 	return true;
 }
 
 void GamePlayScene::delayTest(float dt) {
-	logLabel->setString("Timer delayTest");
+	logLabel->setString("Golden Axe");
 	CCLOG("%s \n", "schedule with delay test");
+}
+
+void GamePlayScene::delayEnemy() {
+		EnemyController::Instance()->createWave(waveNum, this, positionHero, axeBattle);
+		this->schedule(schedule_selector(GamePlayScene::update));
+		waveNum++;
+}
+
+void GamePlayScene::update() {
+	CCLOG("%s \n", "Update_GamePlayScene");
+	EnemyController::Instance()->update();
 }
 
 void GamePlayScene::endMoveCallBack(CCNode* sender) {
@@ -185,14 +214,19 @@ void GamePlayScene::ccTouchEnded(cocos2d::CCTouch* touch,
 		axeBattle->runAction(heroAnimAction);
 	}
 
+
+	positionHero = location;
+
 	run = false;
 }
 
 void GamePlayScene::menuCloseCallback(CCObject* pSender) {
-
+	waveNum = 1;
 	CCLOG("Game Menu !");
 	this->removeFromParentAndCleanup(true);
 	CCDirector::sharedDirector()->replaceScene(
 	CCTransitionZoomFlipX::create(0.5, MenuScene::scene()));
 
 }
+
+

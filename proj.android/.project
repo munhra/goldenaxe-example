@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>GoldenAxe</name>
+	<name>GoldenAxe2</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -50,12 +50,17 @@
 		<link>
 			<name>Classes</name>
 			<type>2</type>
-			<location>/Users/munhra/cocos2d-x/GoldenAxe/Classes</location>
+			<location>/home/munhra/cocos2d-x/GoldenAxe2/Classes</location>
 		</link>
 		<link>
 			<name>Resources</name>
 			<type>2</type>
-			<location>/Users/munhra/cocos2d-x/GoldenAxe/Resources</location>
+			<location>/home/munhra/cocos2d-x/GoldenAxe2/Resources</location>
+		</link>
+		<link>
+			<name>cocos2dx</name>
+			<type>2</type>
+			<location>/home/munhra/cocos2d-x/cocos2dx</location>
 		</link>
 	</linkedResources>
 </projectDescription>
